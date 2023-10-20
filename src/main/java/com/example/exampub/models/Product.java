@@ -3,6 +3,7 @@ package com.example.exampub.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "products")
 @Data
