@@ -1,6 +1,6 @@
 package com.example.exampub.controllers;
 
-import com.example.exampub.dto.UserWithOrdersDto;
+import com.example.exampub.dtos.UserWithOrdersDto;
 import com.example.exampub.models.Order;
 import com.example.exampub.models.Product;
 import com.example.exampub.models.User;
@@ -75,14 +75,17 @@ public class ApiController {
 
     }
 
-    /*
+
     @GetMapping("/summary/all")
-    public ResponseEntity<?> getAllOrdersOfAllDrinks(){
-        //return DTO that contains  product, amount, unitprice summarz price / kinda like inventorz linsting
+    public ResponseEntity<?> getAllOrdersAtAll(){
+
+        //return DTO that contains  product, amount, unitprice summarz price
+        // kinda like inventorz linsting
 
 
     }
 
+    /*
     @GetMapping("/summary/product")
     public ResponseEntity<?> getAllOrdersOfThisProduct(@RequestParam Optional<String> productName){
         //return DTO that contains  all orders of this drink for all drinks like in a table?

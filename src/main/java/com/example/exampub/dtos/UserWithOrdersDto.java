@@ -1,4 +1,4 @@
-package com.example.exampub.dto;
+package com.example.exampub.dtos;
 
 import com.example.exampub.models.Order;
 import com.example.exampub.services.UserService;

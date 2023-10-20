@@ -1,4 +1,4 @@
-package com.example.exampub.services;
+package com.example.exampub.security;
 import com.example.exampub.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
