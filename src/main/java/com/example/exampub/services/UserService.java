@@ -61,7 +61,7 @@ public class UserService {
     }
 
     public void payingForIt(int price, Long userId) {
-        User user = (User) userRepository.findById(userId).get();
+        User user = userRepository.findById(userId).get();
         user.setPocket(user.getPocket() - price);
     }
 }

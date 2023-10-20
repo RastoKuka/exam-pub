@@ -75,28 +75,23 @@ public class ApiController {
 
     }
 
-
+/*
     @GetMapping("/summary/all")
     public ResponseEntity<?> getAllOrdersAtAll(){
+        // return DTO with complete summary information:
+        // each drink with number of sold units, unit price and total price (for all orders together)
+ }
 
-        //return DTO that contains  product, amount, unitprice summarz price
-        // kinda like inventorz linsting
 
-
-    }
-
-    /*
     @GetMapping("/summary/product")
     public ResponseEntity<?> getAllOrdersOfThisProduct(@RequestParam Optional<String> productName){
-        //return DTO that contains  all orders of this drink for all drinks like in a table?
-
-
-    }
+        //return DTO with sold units of one particular drink (with total price (?)
+}
 
     @GetMapping("/summary/user")
     public ResponseEntity<?> getAllOrdersOfUser(@RequestParam Optional<String> username){
-        //return DTO that contains  all orders of this user
-        //or returns DTO that contains all orders of user and displazs it for all users
+        // return DTO with "bill" of one particular user:
+        // drink names, unit of each drink sold, total price
 
     }
 
