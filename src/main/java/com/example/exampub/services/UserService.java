@@ -3,7 +3,10 @@ package com.example.exampub.services;
 import com.example.exampub.models.Order;
 import com.example.exampub.models.User;
 import com.example.exampub.repositories.UserRepository;
+import com.example.exampub.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class UserService {
     }
 
     public List<Order> getOrders(Long id) {
-        return orderRepository.findAllByUser(userRepository.findById(id).get());
+        return orderRepository.findAllByUser((User) userRepository.findById(id).get());
     }
 
     public Optional<User> getUserById(Long id) {
@@ -58,7 +61,7 @@ public class UserService {
     }
 
     public void payingForIt(int price, Long userId) {
-        User user = userRepository.findById(userId).get();
+        User user = (User) userRepository.findById(userId).get();
         user.setPocket(user.getPocket() - price);
     }
 }

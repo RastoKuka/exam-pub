@@ -27,7 +27,7 @@ public class User {
     private int pocket;
 
     @Enumerated(EnumType.STRING)
-    private Role role = Role.CUSTOMER;
+    private final Role role = Role.CUSTOMER;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Order> orders;

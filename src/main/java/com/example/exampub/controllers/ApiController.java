@@ -1,14 +1,14 @@
 package com.example.exampub.controllers;
 
-import com.example.exampub.dto.UserWithOrdersDTO;
+import com.example.exampub.dto.UserWithOrdersDto;
 import com.example.exampub.models.Order;
 import com.example.exampub.models.Product;
 import com.example.exampub.models.User;
+import com.example.exampub.services.ProductService;
 import com.example.exampub.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.exampub.services.ProductService;
 
 import java.util.Optional;
 
@@ -30,7 +30,12 @@ public class ApiController {
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         Optional<User> maybeUser = userService.getUserById(id);
         if (maybeUser.isPresent()) {
-            return ResponseEntity.status(200).body(new UserWithOrdersDTO(maybeUser.get()));
+            return ResponseEntity.status(200).body(new UserWithOrdersDto(maybeUser.get().getUserId(),
+                    maybeUser.get().getUsername(),
+                    maybeUser.get().isActive(),
+                    maybeUser.get().isAdult(),
+                    maybeUser.get().getPocket(),
+                    maybeUser.get().getOrders()));
         } else {
             return ResponseEntity.status(404).body("User does not exist.");
         }
@@ -42,7 +47,7 @@ public class ApiController {
     }
 
     @PostMapping("/buy")
-    public ResponseEntity<?> TryToBuy(@RequestParam("drink")Optional<Product> drinkName, @RequestParam("amount") int amount){
+    public ResponseEntity<?> TryToBuy(@RequestParam("drink") Optional<Product> drinkName, @RequestParam("amount") int amount) {
         User user = User.builder()
                 .userId(userService.getCurrentUserId())
                 .username(userService.getCurrentUserName())
@@ -60,12 +65,12 @@ public class ApiController {
             Order order = new Order(user, drinkName.get(), amount);
             userService.payingForIt(order.getPrice(), user.getUserId());
             return ResponseEntity.status(201).body("Time to pay!" + order);
-        } else if (user.isAdult() && user.getPocket() >= amount * productService.getProductPrice(drinkName.toString())){
+        } else if (user.isAdult() && user.getPocket() >= amount * productService.getProductPrice(drinkName.toString())) {
             Order order = new Order(user, drinkName.get(), amount);
             userService.payingForIt(order.getPrice(), user.getUserId());
             return ResponseEntity.status(201).body("Time to pay!" + order);
         } else {
-            return  ResponseEntity.status(417).body("You're trying wrong door...!");
+            return ResponseEntity.status(417).body("You're trying wrong door...!");
         }
 
     }

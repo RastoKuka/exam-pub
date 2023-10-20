@@ -1,13 +1,14 @@
 package com.example.exampub.dto;
 
 import com.example.exampub.models.Order;
-import com.example.exampub.models.User;
+import com.example.exampub.services.UserService;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class UserWithOrdersDTO {
+public class UserWithOrdersDto {
+
 
     private Long userId;
     private String username;
@@ -17,12 +18,13 @@ public class UserWithOrdersDTO {
     private List<Order> orders;
     private UserService userService;
 
-    public UserWithOrdersDTO(User user) {
-        this.userId = user.getUserId();
-        this.username = user.getUsername();
-        this.isActive = user.isActive();
-        this.isAdult = user.isAdult();
-        this.pocket = user.getPocket();
-        this.orders = userService.getOrders(userId);
+    public UserWithOrdersDto(Long userId, String username, boolean isActive, boolean isAdult,
+                             int pocket, List<Order> orders) {
+        this.userId = userId;
+        this.username = username;
+        this.isActive = isActive;
+        this.isAdult = isAdult;
+        this.pocket = pocket;
+        this.orders = orders;
     }
 }

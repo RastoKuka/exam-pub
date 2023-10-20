@@ -22,5 +22,5 @@ public class Bartender {
     private boolean isActive;
 
     @Enumerated(EnumType.STRING)
-    private Role role = Role.BARTENDER;
+    private final Role role = Role.BARTENDER;
 }
